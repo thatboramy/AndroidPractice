@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+
 public class HatDBHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "Hat";
     public static final int DB_VERSION = 1;
