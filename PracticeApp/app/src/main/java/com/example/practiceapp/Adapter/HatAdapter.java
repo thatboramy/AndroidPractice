@@ -44,17 +44,6 @@ public class HatAdapter extends RecyclerView.Adapter<HatAdapter.ViewHolder> {
         public ViewHolder(final View itemView) {
             super(itemView);
             hatName = (TextView) itemView.findViewById(R.id.hat_textview);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    triggerMessage(itemView.getContext());
-                }
-            });
-        }
-
-        public void triggerMessage(Context context) {
-            Toast toast = Toast.makeText(context, "Item Clicked", Toast.LENGTH_SHORT);
-            toast.show();
         }
 
     }
@@ -68,5 +57,14 @@ public class HatAdapter extends RecyclerView.Adapter<HatAdapter.ViewHolder> {
         //holder.bindCursor(mcursor);
         String currHatName = mcursor.getString(1);
         holder.hatName.setText(currHatName);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = mcursor.getString(1);
+
+                Toast toast = Toast.makeText(mcontext, "Item Clicked: " + name, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
     }
 }

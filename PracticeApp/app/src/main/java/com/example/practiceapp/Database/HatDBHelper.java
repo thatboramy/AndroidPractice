@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class HatDBHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "Hat";
-    public static final int DB_VERSION = 1;
+    public static final int DB_VERSION = 3;
 
     public HatDBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -24,6 +24,8 @@ public class HatDBHelper extends SQLiteOpenHelper {
         insertHat(db, "Beanie", "Brown");
         insertHat(db, "Fedora", "Blue");
         insertHat(db, "Bowler Hat", "Red");
+        insertHat(db, "Baseball Cap", "Brown");
+        insertHat(db, "Cap", "Black");
     }
 
     @Override
