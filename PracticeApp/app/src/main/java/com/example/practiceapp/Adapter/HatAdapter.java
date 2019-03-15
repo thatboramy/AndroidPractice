@@ -18,17 +18,22 @@ public class HatAdapter extends RecyclerView.Adapter<HatAdapter.ViewHolder> {
 
     Context mcontext;
     Cursor mcursor;
+    private View.OnClickListener mOnItemClickListener;
 
+    public void setOnItemClickListener(View.OnClickListener itemClickListener) {
+        mOnItemClickListener = itemClickListener;
+    }
     public HatAdapter(Context context, Cursor cursor) {
         mcontext = context;
         mcursor = cursor;
     }
 
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.listitem_hat, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view, i);
         return viewHolder;
     }
 
@@ -38,12 +43,16 @@ public class HatAdapter extends RecyclerView.Adapter<HatAdapter.ViewHolder> {
         return mcursor.getCount();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView hatName;
 
-        public ViewHolder(final View itemView) {
+        public ViewHolder(final View itemView, int i) {
             super(itemView);
+            final int temppos = i;
             hatName = (TextView) itemView.findViewById(R.id.hat_textview);
+
+            itemView.setTag(this);
+            itemView.setOnClickListener(mOnItemClickListener);
         }
 
     }
@@ -57,7 +66,7 @@ public class HatAdapter extends RecyclerView.Adapter<HatAdapter.ViewHolder> {
         //holder.bindCursor(mcursor);
         String currHatName = mcursor.getString(1);
         holder.hatName.setText(currHatName);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = mcursor.getString(1);
@@ -65,6 +74,6 @@ public class HatAdapter extends RecyclerView.Adapter<HatAdapter.ViewHolder> {
                 Toast toast = Toast.makeText(mcontext, "Item Clicked: " + name, Toast.LENGTH_SHORT);
                 toast.show();
             }
-        });
+        });*/
     }
 }
