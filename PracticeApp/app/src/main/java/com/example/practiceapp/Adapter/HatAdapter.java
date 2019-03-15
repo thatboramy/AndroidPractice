@@ -5,10 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.practiceapp.R;
 
@@ -39,10 +41,22 @@ public class HatAdapter extends RecyclerView.Adapter<HatAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView hatName;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             super(itemView);
             hatName = (TextView) itemView.findViewById(R.id.hat_textview);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    triggerMessage(itemView.getContext());
+                }
+            });
         }
+
+        public void triggerMessage(Context context) {
+            Toast toast = Toast.makeText(context, "Item Clicked", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
     }
 
 
