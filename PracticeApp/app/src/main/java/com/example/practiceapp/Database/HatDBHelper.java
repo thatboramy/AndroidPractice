@@ -2,8 +2,11 @@ package com.example.practiceapp.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
 
 
 public class HatDBHelper extends SQLiteOpenHelper {
@@ -34,5 +37,23 @@ public class HatDBHelper extends SQLiteOpenHelper {
         hatValues.put("NAME", name);
         hatValues.put("COLOR", color);
         db.insert("HAT", null, hatValues);
+    }
+
+    public Cursor getallData() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from Hat", null);
+        return res;
+    }
+
+    public ArrayList<String> getALLNames() {
+        ArrayList<String> array_list = new ArrayList<String>();
+        Cursor res = getallData();
+        res.moveToFirst();
+
+        while (res.isAfterLast() == false) {
+            array_list.add(res.getString(res.getColumnIndex("NAME")));
+            res.moveToNext();
+        }
+        return array_list;
     }
 }
